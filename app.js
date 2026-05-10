@@ -179,7 +179,8 @@ function setupConnectionHandlers() {
             misaBroadcast("I've linked the devices! Now just wait for the sender to choose their files.");
         } else if (data.type === 'disconnecting') {
             isGracefulDisconnect = true;
-            misaBroadcast("The other device has ended the session. Connection closed gracefully.");
+            alert("MISA: The other device has ended the session. The connection is now closed.");
+            misaBroadcast("The session has ended gracefully. Everything is safe!");
         } else if (data.type === 'file-info') {
             handleFileInfo(data);
         } else if (data.type === 'file-chunk') {
@@ -188,7 +189,12 @@ function setupConnectionHandlers() {
     });
     conn.on('close', () => {
         if (!isGracefulDisconnect) {
-            alert("Connection lost unexpectedly.");
+            // If the transfer was already finished, don't show a scary error
+            if (receivedInSession > 0 && receivedInSession >= expectedInSession) {
+                alert("MISA: The session has finished and the connection is closed. Don't forget to save your videos!");
+            } else {
+                alert("Connection lost unexpectedly.");
+            }
         }
     });
 }
@@ -648,6 +654,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         });
     };
+});
+
+// Handle manual browser refreshes/closes gracefully
+window.addEventListener('beforeunload', () => {
+    if (conn && conn.open) {
+        conn.send({ type: 'disconnecting' });
+    }
 });
 
 initPeer();
