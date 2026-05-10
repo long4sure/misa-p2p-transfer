@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,18 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
+
 <body>
     <div class="blob"></div>
     <div class="blob-2"></div>
-    
+
     <div class="container">
         <header class="fade-in">
             <div class="logo-area">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                <h1>MISA</h1>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <div style="display: flex; flex-direction: column;">
+                    <h1>MISA</h1>
+                    <span class="version-badge" onclick="toggleVersionModal()">v2.0✨ What's New?</span>
+                </div>
             </div>
             <p class="subtitle">My Instant Sharing App</p>
             <p class="tagline">The simplest way to pass videos between devices.</p>
@@ -29,7 +40,11 @@
         <div id="selection-screen" class="selection-container fade-in">
             <div class="selection-card" id="select-sender">
                 <div class="icon-bg">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
                 </div>
                 <h3>Send Video</h3>
                 <p>Pick a video and get a Share Code to send it.</p>
@@ -37,7 +52,11 @@
             </div>
             <div class="selection-card" id="select-receiver">
                 <div class="icon-bg">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
                 </div>
                 <h3>Receive Video</h3>
                 <p>Enter a Share Code to download your video.</p>
@@ -48,13 +67,22 @@
         <!-- SENDER CARD -->
         <section class="card role-card slide-up" id="sender-card" style="display: none;">
             <button class="btn-back" onclick="resetUI()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12" />
+                    <polyline points="12 19 5 12 12 5" />
+                </svg>
                 Go Back
             </button>
             <h2>Choose Video</h2>
-            
+
             <div id="drop-zone" class="file-drop">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:0.5rem; opacity:0.5;"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    style="margin-bottom:0.5rem; opacity:0.5;">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                    <line x1="7" y1="2" x2="7" y2="22" />
+                    <line x1="17" y1="2" x2="17" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                </svg>
                 <p>Tap here to pick your videos</p>
                 <p class="file-info" id="file-name-display">No videos chosen</p>
                 <input type="file" id="file-input" accept="video/*" multiple hidden>
@@ -64,8 +92,18 @@
                 <label>Your Share Code</label>
                 <div class="peer-id-display">
                     <span id="my-peer-id">Loading...</span>
-                    <button class="btn-copy" id="copy-btn">Copy</button>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-copy" id="copy-btn">Copy</button>
+                        <button class="btn-copy" id="qr-gen-btn" style="background:var(--accent-glow)">QR</button>
+                    </div>
                 </div>
+            </div>
+
+            <div id="qr-container"
+                style="display:none; text-align:center; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 20px; border: 1px solid var(--border);">
+                <canvas id="qr-code"></canvas>
+                <p style="font-size:0.8rem; margin-top:0.5rem; color:var(--text-secondary);">Ask the receiver to scan
+                    this</p>
             </div>
 
             <div class="progress-container" id="send-progress-container">
@@ -76,13 +114,27 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="send-progress-fill"></div>
                 </div>
+                <div class="metrics-row" id="send-metrics" style="display: none;">
+                    <span id="send-speed">0 MB/s</span>
+                    <span id="send-eta">-- remaining</span>
+                </div>
+            </div>
+
+            <!-- Next Steps for Sender -->
+            <div id="sender-next-steps" style="display:none; margin-top:2rem; width:100%; text-align:center; flex-direction:column; gap:0.5rem;">
+                <p style="font-size:0.85rem; color:var(--success); font-weight:600; margin-bottom:0.5rem;">Mission Accomplished!</p>
+                <button class="btn" onclick="resetSession()">Start New Transfer</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('history-section').scrollIntoView({behavior:'smooth'})">View History</button>
             </div>
         </section>
 
         <!-- RECEIVER CARD -->
         <section class="card role-card slide-up" id="receiver-card" style="display: none;">
             <button class="btn-back" onclick="resetUI()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12" />
+                    <polyline points="12 19 5 12 12 5" />
+                </svg>
                 Go Back
             </button>
             <h2>Enter Share Code</h2>
@@ -93,6 +145,18 @@
             </div>
 
             <button class="btn" id="connect-btn">Connect & Download</button>
+            <button class="btn btn-secondary" id="scan-btn" style="margin-top:0.5rem; width:100%;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="margin-right:8px; vertical-align:middle;">
+                    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                </svg>
+                Scan QR Code
+            </button>
+
+            <div id="reader" style="display:none; margin-top:1rem; border-radius:20px; overflow:hidden;"></div>
 
             <div class="progress-container" id="receive-progress-container">
                 <div class="status-row">
@@ -102,6 +166,28 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="receive-progress-fill"></div>
                 </div>
+                <div class="metrics-row" id="receive-metrics" style="display: none;">
+                    <span id="receive-speed">0 MB/s</span>
+                    <span id="receive-eta">-- remaining</span>
+                </div>
+            </div>
+
+            <div id="batch-actions" style="display:none; gap:0.5rem; margin-top:0.5rem; width:100%;">
+                <button class="btn btn-secondary" id="save-all-btn" style="flex:2; border-color:var(--success); color:var(--success);">
+                    Save All
+                </button>
+                <button class="btn btn-error" id="clear-all-btn" style="flex:1; border-radius:16px;">
+                    Clear All
+                </button>
+            </div>
+
+            <div id="received-files-list" style="width:100%; display:flex; flex-direction:column; gap:1rem; margin-top:1rem;"></div>
+
+            <!-- Next Steps for Receiver -->
+            <div id="receiver-next-steps" style="display:none; margin-top:2rem; width:100%; text-align:center; flex-direction:column; gap:0.5rem;">
+                <p style="font-size:0.85rem; color:var(--success); font-weight:600; margin-bottom:0.5rem;">All Files Received!</p>
+                <button class="btn" onclick="resetSession()">Start New Session</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('history-section').scrollIntoView({behavior:'smooth'})">View History</button>
             </div>
         </section>
 
@@ -111,31 +197,101 @@
             <div class="info-grid">
                 <div class="info-item">
                     <div class="icon-sm">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
                     </div>
                     <h4>Private</h4>
                     <p>No servers involved.</p>
                     <button class="learn-more" onclick="toggleInfo(this)">Explain More</button>
-                    <div class="details">Your video moves directly between devices. Since nothing is ever stored on a server, your privacy is 100% guaranteed.</div>
+                    <div class="details">Your video moves directly between devices. Since nothing is ever stored on a
+                        server, your privacy is 100% guaranteed.</div>
                 </div>
                 <div class="info-item">
                     <div class="icon-sm">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
                     </div>
                     <h4>Speed</h4>
                     <p>Direct device link.</p>
                     <button class="learn-more" onclick="toggleInfo(this)">Explain More</button>
-                    <div class="details">Using a direct Wi-Fi or network link is much faster than traditional cloud uploads. We use every bit of your network's power.</div>
+                    <div class="details">Using a direct Wi-Fi or network link is much faster than traditional cloud
+                        uploads. We use every bit of your network's power.</div>
                 </div>
                 <div class="info-item">
                     <div class="icon-sm">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg>
                     </div>
                     <h4>No Quality Loss</h4>
                     <p>Original file quality.</p>
                     <button class="learn-more" onclick="toggleInfo(this)">Explain More</button>
-                    <div class="details">We don't compress your videos. You receive the exact same file that was sent, pixel for pixel.</div>
+                    <div class="details">We don't compress your videos. You receive the exact same file that was sent,
+                        pixel for pixel.</div>
                 </div>
+                <div class="info-item">
+                    <div class="icon-sm">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                            <path
+                                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                        </svg>
+                    </div>
+                    <h4>Stay Active</h4>
+                    <p>Keep browser open.</p>
+                    <button class="learn-more" onclick="toggleInfo(this)">Explain More</button>
+                    <div class="details">MISA creates a live digital wire between devices. If you close the tab, lock
+                        your phone, or switch apps, the connection will drop.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIPS SECTION -->
+        <section class="tips-section fade-in">
+            <h3>Pro-Tips for Success</h3>
+            <div class="tips-container">
+                <div class="tip-box do">
+                    <div class="tip-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--success)"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        The DO's
+                    </div>
+                    <ul>
+                        <li>Use high-speed Wi-Fi or local network.</li>
+                        <li>Keep the tab active and screen awake.</li>
+                        <li>Click 'Clear' after saving to free up RAM.</li>
+                    </ul>
+                </div>
+                <div class="tip-box dont">
+                    <div class="tip-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--error)"
+                            stroke-width="3">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                        The DON'Ts
+                    </div>
+                    <ul>
+                        <li>Don't send files larger than 2GB.</li>
+                        <li>Don't refresh the page during transfer.</li>
+                        <li>Don't switch to other apps on mobile.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORY SECTION -->
+        <section class="info-section fade-in" id="history-section" style="display:none;">
+            <h3>Recent Transfers</h3>
+            <div id="history-list" class="history-grid">
+                <!-- History items will appear here -->
+            </div>
+            <div style="text-align:center; margin-top:1rem;">
+                <button class="learn-more" onclick="clearHistory()">Clear History</button>
             </div>
         </section>
     </div>
@@ -146,27 +302,66 @@
             <div class="chat-header">
                 <div style="display:flex; align-items:center; gap:8px;">
                     <div class="bot-status-dot"></div>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                        <path d="M12 8V4H8" />
+                        <rect x="4" y="8" width="16" height="12" rx="2" />
+                        <path d="M2 14h2" />
+                        <path d="M20 14h2" />
+                        <path d="M15 13v2" />
+                        <path d="M9 13v2" />
+                    </svg>
                     <span>MISA Assistant</span>
                 </div>
                 <button onclick="toggleChat()" class="chat-close-btn">&times;</button>
             </div>
             <div id="chat-messages" class="chat-messages">
-                <div class="bot-msg">Hi! I'm MISA. I can help you send or receive videos privately. What's on your mind?</div>
+                <div class="bot-msg">Hi! I'm MISA. I can help you send or receive videos privately. I'll also keep an
+                    eye on your transfers to make sure they go smoothly!
+                </div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="chat-input" placeholder="Type your question...">
                 <button id="send-chat-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polyline points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polyline points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
                 </button>
             </div>
         </div>
         <button id="chat-toggle-btn" class="chat-toggle-btn" onclick="toggleChat()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 8V4H8" />
+                <rect x="4" y="8" width="16" height="12" rx="2" />
+                <path d="M2 14h2" />
+                <path d="M20 14h2" />
+                <path d="M15 13v2" />
+                <path d="M9 13v2" />
+            </svg>
             MISA
+            <span id="chat-badge" class="chat-badge"></span>
         </button>
+    </div>
+
+    <!-- What's New Modal -->
+    <div id="version-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <button class="modal-close" onclick="toggleVersionModal()">&times;</button>
+            <h2 style="color:var(--accent-color);">✨ What's New in v2.0</h2>
+            <ul class="feature-list">
+                <li>🚀 <strong>Real-Time Metrics</strong>: Live speed & ETA tracking.</li>
+                <li>📜 <strong>History Log</strong>: View your last 10 transfers instantly.</li>
+                <li>🤖 <strong>Enhanced MISA</strong>: State-aware assistant & notifications.</li>
+                <li>🔋 <strong>Screen Wake Lock</strong>: Keeps connection alive while sending.</li>
+                <li>📸 <strong>QR Connectivity</strong>: Scan or Generate for fast pairing.</li>
+                <li>📦 <strong>Batch Controls</strong>: Save or Clear all with one tap.</li>
+                <li>🔒 <strong>Secure Lock</strong>: Prevents session hijacking.</li>
+            </ul>
+            <button class="btn" onclick="toggleVersionModal()" style="margin-top:1.5rem;">Let's Go!</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
 </body>
+
 </html>
