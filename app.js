@@ -123,7 +123,11 @@ function copyToClipboard(text) {
 
 function initPeer() {
     const customId = generateHumanId();
-    peer = new Peer(customId);
+    // Explicitly set secure: true for GitHub Pages (HTTPS)
+    peer = new Peer(customId, {
+        debug: 1,
+        secure: true
+    });
 
     peer.on('open', (id) => {
         myPeerIdDisplay.innerText = id;
@@ -151,6 +155,11 @@ function initPeer() {
         if (err.type === 'peer-unavailable') {
             misaBroadcast("Hmm, I couldn't find that device. Could you double-check the Share Code for any typos?");
             alert("MISA here! I couldn't find a device with that code. Please double-check the spelling and try again!");
+        } else if (err.type === 'unavailable-id') {
+            misaBroadcast("It looks like this Share Code is already taken. Let me try generating a new one...");
+            location.reload();
+        } else {
+            misaBroadcast(`Connection Error: ${err.type}. Please try refreshing.`);
         }
     });
 }
